@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package proto1;
+
+
+service UserSvc {
+    rpc Get(Empty) returns (User) {};
+}
+
+message Empty {
+
+}
+message User {
+    string Name = 1;
+}
