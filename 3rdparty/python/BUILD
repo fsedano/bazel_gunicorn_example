@@ -3,7 +3,7 @@ load("@my_deps//:requirements.bzl", "requirement")
 
 package(default_visibility = ["//visibility:public"])
 
-#exports_files(["requirements_lock.txt"])
+exports_files(["requirements_lock.txt"])
 py_library(
     name = "flask",
     deps = [

@@ -13,3 +13,5 @@ pytest==7.2.1
 tomli==2.0.1
 Werkzeug==2.2.2
 setuptools==59.6.0
+importlib-metadata==6.0.0
+zipp==3.11.0
