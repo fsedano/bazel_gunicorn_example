@@ -1,5 +1,6 @@
 load("@rules_python//python:defs.bzl", "py_binary")
 load("@io_bazel_rules_docker//python3:image.bzl", "py3_image")
+load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -37,4 +38,14 @@ py3_image(
   deps = [
     ":ws"
   ]
+)
+
+k8s_object(
+    name = "main_k8s",
+    kind = "deployment",
+    template = ":deployment.yaml",
+    cluster = "default",
+    images = {
+        "fsedano/k8stest:null" : ":main_image"
+    },
 )
