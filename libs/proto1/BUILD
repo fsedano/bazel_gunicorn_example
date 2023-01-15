@@ -9,6 +9,6 @@ proto_library(
 )
 
 python_grpc_library(
-    name = "py_grpc_lib",
-    protos = [":user_proto"],
+    name = "py_grpc_fran_lib",
+    protos = [":user_proto"]
 )

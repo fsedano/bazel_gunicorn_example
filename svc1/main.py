@@ -2,9 +2,12 @@ from flask import Flask
 #from gunicorn.app.wsgiapp import 
 import gunicorn.app.base
 import logging
+import grpc
+import libs.proto1.user_pb2
+import libs.proto1.user_pb2_grpc
 
 logging.basicConfig(level=logging.INFO)
-from src import f1
+from svc1.src import f1
 app = Flask(__name__)
 
 @app.route("/")

@@ -16,7 +16,6 @@ load("@rules_python//python:pip.bzl", "pip_parse")
 pip_parse(
    name = "my_deps",
    requirements_lock = "//3rdparty/python:requirements_lock.txt",
-   #requirements_lock = "//:requirements_lock.txt"
 )
 # Load the starlark macro which will define your dependencies.
 load("@my_deps//:requirements.bzl", "install_deps")
@@ -71,6 +70,7 @@ rules_proto_dependencies()
 rules_proto_toolchains()
 
 ### Python grpc
+
 load("@rules_proto_grpc//python:repositories.bzl", rules_proto_grpc_python_repos = "python_repos")
 
 rules_proto_grpc_python_repos()
@@ -81,10 +81,7 @@ grpc_deps()
 
 load("@com_github_grpc_grpc//bazel:grpc_extra_deps.bzl", "grpc_extra_deps")
 
-
 grpc_extra_deps()
-
-
 
 ### rules docker
 
@@ -104,18 +101,6 @@ container_repositories()
 load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
 
 container_deps()
-
-load(
-    "@io_bazel_rules_docker//container:container.bzl",
-    "container_pull",
-)
-
-#container_pull(
-#  name = "java_base",
-#  registry = "gcr.io",
-#  repository = "distroless/java",
-  # 'tag' is also supported, but digest is encouraged for reproducibility.
-#)
 
 
 

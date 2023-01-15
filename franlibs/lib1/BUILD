@@ -4,8 +4,8 @@ package(default_visibility = ["//visibility:public"])
 
 
 py_library(
-    name = "lib1",
+    name = "lib1_lib",
     srcs = 
-        glob(["src/*.py"])
+        glob(["src/*.py"]) +  ["__init__.py", "datos.py"]
     ,
 )
