@@ -1,3 +1,4 @@
-Example for Bazel with Gunicorn and flask
+Example for Bazel with Gunicorn, flask gRPC.
 
-Includes generating Docker image
+Includes generating Docker image and pushing to K8s
+
