@@ -4,7 +4,11 @@ package proto1;
 
 
 service UserSvc {
-    rpc Get(Empty) returns (User) {};
+    rpc Get(RequestId) returns (User) {};
+}
+
+message RequestId {
+    int32 Id = 1;
 }
 
 message Empty {
