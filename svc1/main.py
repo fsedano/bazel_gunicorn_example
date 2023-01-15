@@ -1,7 +1,9 @@
 from flask import Flask
 #from gunicorn.app.wsgiapp import 
 import gunicorn.app.base
+import logging
 
+logging.basicConfig(level=logging.INFO)
 from src import f1
 app = Flask(__name__)
 
@@ -26,9 +28,9 @@ class StandaloneApplication(gunicorn.app.base.BaseApplication):
         return self.application
 
 if __name__ == "__main__":
-    print("Hola from py")
+    logging.info("Hola from py")
     f1.F1()
-    print(f"3 + 4 = {f1.Suma(3,4)}\n")
+    logging.info(f"3 + 4 = {f1.Suma(3,4)}")
     app = Flask(__name__)
     options = {
         'bind': '%s:%s' % ('127.0.0.1', '8080'),
