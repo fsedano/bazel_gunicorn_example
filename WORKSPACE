@@ -6,11 +6,23 @@ http_archive(
     url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.16.2.tar.gz",
 )
 
+#load("@rules_python//python:repositories.bzl", "python_register_toolchains")
+
+#python_register_toolchains(
+#    name = "python3_9",
+    # Available versions are listed in @rules_python//python:versions.bzl.
+    # We recommend using the same version your team is already standardized on.
+#    python_version = "3.9",
+#)
+
+#load("@python3_9//:defs.bzl", "interpreter")
+
+load("@rules_python//python:pip.bzl", "pip_parse")
+
 
 #load("@rules_python//python:repositories.bzl", "py_repositories")
 #py_repositories()
 
-load("@rules_python//python:pip.bzl", "pip_parse")
 # Create a central repo that knows about the dependencies needed from
 # requirements_lock.txt.
 pip_parse(
@@ -37,9 +49,25 @@ load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_depe
 
 go_rules_dependencies()
 
-go_register_toolchains(version = "1.19.3")
+go_register_toolchains(version = "1.18")
 
 
+####
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
+    name = "com_google_protobuf",
+    sha256 = "d0f5f605d0d656007ce6c8b5a82df3037e1d8fe8b121ed42e536f569dec16113",
+    strip_prefix = "protobuf-3.14.0",
+    urls = [
+        "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v3.14.0.tar.gz",
+        "https://github.com/protocolbuffers/protobuf/archive/v3.14.0.tar.gz",
+    ],
+)
+
+load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+
+protobuf_deps()
 
 ## GRPC
 
@@ -102,7 +130,28 @@ load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
 
 container_deps()
 
+load("@io_bazel_rules_docker//container:container.bzl", "container_pull")
 
+container_pull(
+    name = "python_container2",
+    registry = "docker.io/library",
+    repository = "python",
+    tag = "3.9-slim",
+)
+
+container_pull(
+    registry = "gcr.io/distroless",
+    repository = "python3-debian10",
+    tag = "latest",
+    name = "python_container3",
+)
+
+container_pull(
+    registry = "docker.io/library",
+    repository = "python",
+    tag = "3.10",
+    name = "python_container",
+)
 
 load(
     "@io_bazel_rules_docker//python3:image.bzl",
@@ -126,3 +175,4 @@ k8s_repositories()
 #load("@io_bazel_rules_k8s//k8s:k8s_go_deps.bzl", k8s_go_deps = "deps")
 
 #k8s_go_deps()
+
