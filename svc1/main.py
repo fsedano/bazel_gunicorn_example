@@ -31,7 +31,7 @@ class StandaloneApplication(gunicorn.app.base.BaseApplication):
         return self.application
 
 if __name__ == "__main__":
-    logging.info("Hola from py new version AND MORE")
+    logging.info("Hola from py new version it's sunday!")
     f1.F1()
     logging.info(f"3 + 4 = {f1.Suma(3,4)}")
     app = Flask(__name__)
