@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package proto1;
+
+
+service UserSvc {
+    rpc Get(RequestId) returns (User) {};
+}
+
+message RequestId {
+    int32 Id = 1;
+}
+
+message Empty {
+
+}
+message User {
+    string Name = 1;
+}
